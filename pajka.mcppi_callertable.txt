@@ -1,0 +1,45 @@
+main
+	__CC2DW
+	nastav_rezim
+		EEPROM_Read
+	Div_16x16_S
+		Div_16x16_S_L
+	rut_encA
+		EEPROM_Read
+		konver
+			Mul_16X16_U
+			Div_16X16_U
+			div
+				Div_16x16_S
+					Div_16x16_S_L
+		display
+			nobusy_send_instr
+			nobusy_send_data
+		povol_prerus
+	rut_encB
+		EEPROM_Read
+		konver
+			Mul_16X16_U
+			Div_16X16_U
+			div
+				Div_16x16_S
+					Div_16x16_S_L
+		display
+			nobusy_send_instr
+			nobusy_send_data
+		povol_prerus
+	rut_encBUT
+		EEPROM_Write
+		povol_prerus
+	povol_prerus
+	konver
+		Mul_16X16_U
+		Div_16X16_U
+		div
+			Div_16x16_S
+				Div_16x16_S_L
+	display
+		nobusy_send_instr
+		nobusy_send_data
+isr_tmr1
+isr_portb

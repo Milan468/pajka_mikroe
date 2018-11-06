@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<MCU_DEVICE_FLAGS>
+  <DEVICE>
+    <DEVICE_NAME>P18F252</DEVICE_NAME>
+    <DEVICE_CLOCK>4</DEVICE_CLOCK>
+    <SETTINGS>
+      <COUNT>29</COUNT>
+      <SETTING0>
+        <NAME>Oscillator Selection</NAME>
+        <DESCRIPTION>XT oscillator</DESCRIPTION>
+      </SETTING0>
+      <SETTING1>
+        <NAME>Oscillator System Clock Switch</NAME>
+        <DESCRIPTION>Disabled</DESCRIPTION>
+      </SETTING1>
+      <SETTING2>
+        <NAME>Power-up Timer</NAME>
+        <DESCRIPTION>Enabled</DESCRIPTION>
+      </SETTING2>
+      <SETTING3>
+        <NAME>Brown-out Reset</NAME>
+        <DESCRIPTION>Enabled</DESCRIPTION>
+      </SETTING3>
+      <SETTING4>
+        <NAME>Brown-out Reset Voltage</NAME>
+        <DESCRIPTION>VBOR set to 2.7V</DESCRIPTION>
+      </SETTING4>
+      <SETTING5>
+        <NAME>Watchdog Timer</NAME>
+        <DESCRIPTION>Disabled</DESCRIPTION>
+      </SETTING5>
+      <SETTING6>
+        <NAME>Watchdog Timer Postscale</NAME>
+        <DESCRIPTION>1:128</DESCRIPTION>
+      </SETTING6>
+      <SETTING7>
+        <NAME>CCP2 Mux bit</NAME>
+        <DESCRIPTION>Enabled</DESCRIPTION>
+      </SETTING7>
+      <SETTING8>
+        <NAME>Stack Full/Underflow Reset</NAME>
+        <DESCRIPTION>Enabled</DESCRIPTION>
+      </SETTING8>
+      <SETTING9>
+        <NAME>Low Voltage ICSP</NAME>
+        <DESCRIPTION>Disabled</DESCRIPTION>
+      </SETTING9>
+      <SETTING10>
+        <NAME>Background Debug</NAME>
+        <DESCRIPTION>Enabled</DESCRIPTION>
+      </SETTING10>
+      <SETTING11>
+        <NAME>Code Protection (Block 0)</NAME>
+        <DESCRIPTION>Block 0 (000200-001FFFh) not code protected</DESCRIPTION>
+      </SETTING11>
+      <SETTING12>
+        <NAME>Code Protection (Block 1)</NAME>
+        <DESCRIPTION>Block 1 (002000-003FFFh) not code protected</DESCRIPTION>
+      </SETTING12>
+      <SETTING13>
+        <NAME>Code Protection (Block 2)</NAME>
+        <DESCRIPTION>Block 2 (004000-005FFFh) not code protected</DESCRIPTION>
+      </SETTING13>
+      <SETTING14>
+        <NAME>Code Protection (Block 3)</NAME>
+        <DESCRIPTION>Block 3 (006000-007FFFh) not code protected</DESCRIPTION>
+      </SETTING14>
+      <SETTING15>
+        <NAME>Boot Block Code Protection</NAME>
+        <DESCRIPTION>Disabled</DESCRIPTION>
+      </SETTING15>
+      <SETTING16>
+        <NAME>Data EEPROM Code Protection</NAME>
+        <DESCRIPTION>Disabled</DESCRIPTION>
+      </SETTING16>
+      <SETTING17>
+        <NAME>Write Protection (Block 0)</NAME>
+        <DESCRIPTION>Block 0 (000800-001FFFh) or (001000-001FFFh) is not write-protected</DESCRIPTION>
+      </SETTING17>
+      <SETTING18>
+        <NAME>Write Protection (Block 1)</NAME>
+        <DESCRIPTION>Block 1 (002000-003FFFh) is not write-protected</DESCRIPTION>
+      </SETTING18>
+      <SETTING19>
+        <NAME>Write Protection (Block 2)</NAME>
+        <DESCRIPTION>Block 2 (004000-005FFFh) is not write-protected</DESCRIPTION>
+      </SETTING19>
+      <SETTING20>
+        <NAME>Write Protection (Block 3)</NAME>
+        <DESCRIPTION>Block 3 (006000-007FFFh) is not write-protected</DESCRIPTION>
+      </SETTING20>
+      <SETTING21>
+        <NAME>Configuration Register Write Protection</NAME>
+        <DESCRIPTION>Disabled</DESCRIPTION>
+      </SETTING21>
+      <SETTING22>
+        <NAME>Boot Block Write Protection</NAME>
+        <DESCRIPTION>Disabled</DESCRIPTION>
+      </SETTING22>
+      <SETTING23>
+        <NAME>Data EEPROM Write Protection</NAME>
+        <DESCRIPTION>Disabled</DESCRIPTION>
+      </SETTING23>
+      <SETTING24>
+        <NAME>Table Read Protection (Block 0)</NAME>
+        <DESCRIPTION>Block 0 (000800-001FFFh) is not protected from table reads executed in other blocks</DESCRIPTION>
+      </SETTING24>
+      <SETTING25>
+        <NAME>Table Read Protection (Block 1)</NAME>
+        <DESCRIPTION>Block 1 (002000-003FFFh) is not protected from table reads executed in other blocks</DESCRIPTION>
+      </SETTING25>
+      <SETTING26>
+        <NAME>Table Read Protection (Block 2)</NAME>
+        <DESCRIPTION>Block 2 (004000-005FFFh) not protected from table reads executed in other blocks</DESCRIPTION>
+      </SETTING26>
+      <SETTING27>
+        <NAME>Table Read Protection bi (Block 3)</NAME>
+        <DESCRIPTION>Block 3 (006000-007FFFh) not protected from table reads executed in other blocks</DESCRIPTION>
+      </SETTING27>
+      <SETTING28>
+        <NAME>Boot Block Table Read Protection</NAME>
+        <DESCRIPTION>Disabled</DESCRIPTION>
+      </SETTING28>
+    </SETTINGS>
+  </DEVICE>
+</MCU_DEVICE_FLAGS>

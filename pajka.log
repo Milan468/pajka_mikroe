@@ -1,0 +1,20 @@
+0	1	mikroCPIC1618.exe -MSF -DBG -pP18F252 -DL -O11111114 -fo4 -EH"C:\aplikace\milan\mikroC PRO for PIC\Projects\pajka\EEPROM_pajka.ihex" -N"C:\aplikace\milan\mikroC PRO for PIC\Projects\pajka\pajka.mcppi" -SP"C:\aplikace\milan\mikroC PRO for PIC\Defs\" -SP"C:\aplikace\milan\mikroC PRO for PIC\uses\P18\" -SP"C:\aplikace\milan\mikroC PRO for PIC\Projects\pajka\" -IP"C:\aplikace\milan\mikroC PRO for PIC\uses\P18\" -IP"C:\aplikace\milan\mikroC PRO for PIC\Projects\pajka\" "pajka.c" "libST7036.c" "__Lib_Math.mcl" "__Lib_MathDouble.mcl" "__Lib_System.mcl" "__Lib_Delays.mcl" "__Lib_CType.mcl" "__Lib_CString.mcl" "__Lib_CStdlib.mcl" "__Lib_CMath.mcl" "__Lib_ADC_A_C.mcl" "__Lib_EEPROM_256.mcl"	 
+hint: 0	1139	Available RAM: 1515 [bytes], Available ROM: 32768 [bytes]	 
+diagnostics: 0	122	Compilation Started	libst7036.h
+hint: 0	1004	interrupt handler (isr_portb at 0x0008)	pajka.c
+hint: 0	1004	interrupt handler (isr_tmr1 at 0x0018)	pajka.c
+warning: 139	1508	Implicit conversion of int to ptr	pajka.c
+warning: 203	1503	Result is not defined in function: 'rut_encBUT'	pajka.c
+warning: 218	1508	Implicit conversion of int to ptr	pajka.c
+warning: 237	1508	Implicit conversion of int to ptr	pajka.c
+hint: 243	1163	Variable 'res_temp' has been declared, but not used	pajka.c
+diagnostics: 305	123	Compiled Successfully	pajka.c
+diagnostics: 0	122	Compilation Started	libST7036.c
+diagnostics: 50	123	Compiled Successfully	libST7036.c
+diagnostics: 0	127	All files Compiled in 62 ms	 
+hint: 0	1144	Used RAM (bytes): 61 (4%)  Free RAM (bytes): 1454 (96%)	Used RAM (bytes): 61 (4%)  Free RAM (bytes): 1454 (96%)
+hint: 0	1144	Used ROM (bytes): 2312 (7%)  Free ROM (bytes): 30456 (93%)	Used ROM (bytes): 2312 (7%)  Free ROM (bytes): 30456 (93%)
+diagnostics: 0	125	Project Linked Successfully	pajka.mcppi
+diagnostics: 0	128	Linked in 16 ms	 
+diagnostics: 0	129	Project 'pajka.mcppi' completed: 94 ms	 
+diagnostics: 0	103	Finished successfully: 06 11 2018, 04:08:42	pajka.mcppi
