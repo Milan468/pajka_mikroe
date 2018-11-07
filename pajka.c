@@ -16,14 +16,14 @@ Prevodna konstanta medzi AD a *C je teda 100/54 = 1.85 C/bit.
  *RA1 - O - RS
  *RA2 - o - RW
  *RA3 - O - E
- *RB0 - O - out_led
- *RB1 - I - in_nap
- *RB2 - I - tlacidlo_rucky
- *RB3 - O - out_paj
- *RB4 - I -
- *RB5 - I - in_encB
- *RB6 - I - in_encBUT
- *RB7 - I - in_encA
+ *RB0 - I - in_encBUT
+ *RB1 - I - in_encA
+ *RB2 - I - in_encB
+ *RB3 - I - in_nap
+ *RB4 - I - tlacidlo rucky
+ *RB5 - O - out_paj
+ *RB6 - O -
+ *RB7 - O - out_led
  *RC7 - I/O -Busy
 
 LCD : EADOGM081B-A (ST7036)
@@ -33,7 +33,6 @@ LCD : EADOGM081B-A (ST7036)
 /*-----interrupt-----------------------------*/
 //void interrupt(){         //SIGHANDLER(int_handler) 0x08
 void isr_portb() iv 0x0008 ics ICS_AUTO {
-    povol_prerus_rucka = 0;
     povol_prerus_enkoder = 0;
     Delay_ms(2);    //zakmity max 2ms pre enkoder a tlacidlo rucky
     if (in_encA)  priz_enc = 1;
@@ -120,13 +119,13 @@ while (1){
     res_ad = ((temp_ad[0] + temp_ad[1] + temp_ad[2])/3);
 
     switch(priz_enc) {
-            case 1 : rut_encA(&res_eeprom); break;
-            case 2 : rut_encB(&res_eeprom); break;
+            case 1 : rut_encA(rezim, &res_eeprom); break;
+            case 2 : rut_encB(rezim, &res_eeprom); break;
             case 3 : rut_encBUT(&priz_enc); break;
             break;
     }
 
-    if(priz_prerus_rucka){  //ak prislo prerusenie od tlacidla
+    if(priznak_tlacidlo_rucky){  //ak prislo prerusenie od tlacidla
         if ((priznak_tlacidlo_rucky)&&(!blinkdisp)){
             if (rezim) stary_rezim = rezim;
             rezim = 0;
@@ -136,8 +135,8 @@ while (1){
             rezim = stary_rezim;
             nastav_rezim(rezim, res_eeprom);
         }
-    priz_prerus_rucka = 0;
-    povol_prerus(priz_enc);
+    priznak_tlacidlo_rucky = 0;
+    povol_prerus_rucka = 1;
     }
     
     if(blinkdisp){          
@@ -145,6 +144,11 @@ while (1){
         display(&lcd_result);
     }
     else{
+        if(zapis){
+            konver(rezim, res_eeprom, &lcd_result);
+            zapis = 0;
+            Delay_ms(1000);
+        }
         konver(rezim, res_ad, &lcd_result);
         display(&lcd_result);
     } 
@@ -159,14 +163,15 @@ while (1){
     }
 }//while
 }//main
+
 /*--------subroutines----------------------------  */
+
 u_short nastav_rezim(u_short rezim, u_short res_eeprom){
-    //Delay_ms(50);    //pockam kym skoncia zakmity
     res_eeprom = EEPROM_Read(rezim);
     return(res_eeprom);
 }
 
-u_short rut_encBUT(u_short *p_priz_enc){
+void rut_encBUT(u_short *p_priz_enc){
     Delay_ms(500);
     if(in_encBUT){             //ak je stlacenie dlhe
         if(blinkdisp){
@@ -176,6 +181,7 @@ u_short rut_encBUT(u_short *p_priz_enc){
             povol_prerus_tmr1 = 0;
             priz_prerus_tmr1 = 0;
             svietiLCD = 0;
+            tmr_tmp = 0;
             zapis = 1;
         }
     }
@@ -195,15 +201,15 @@ u_short rut_encBUT(u_short *p_priz_enc){
             TMR1H = 0;
             TMR1L = 0;
             svietiLCD = 0;
+            tmr_tmp = 0;
             zapis = 0;
         }
     }
-    //priz_enc = 0;
-    //return(priz_enc);
-    povol_prerus(&priz_enc);
+    priz_enc = 0;
+    povol_prerus_enkoder = 1; //potom povolim prerusenie
 }
 
-u_short rut_encA(u_short *p_res_eeprom){
+u_short rut_encA(u_short rezim, u_short *p_res_eeprom){
     if (!blinkdisp){    //ak neblika display
         rezim += 1;     //tak zmen rezim
         if (rezim > 3) {
@@ -216,11 +222,12 @@ u_short rut_encA(u_short *p_res_eeprom){
         konver(rezim, res_eeprom, &lcd_result);
         display(&lcd_result);
     }
-    povol_prerus(priz_enc);
+    priz_enc = 0;
+    povol_prerus_enkoder = 1; //potom povolim prerusenie
     return(rezim);
 }
 
-u_short rut_encB(u_short *p_res_eeprom){
+u_short rut_encB(u_short rezim, u_short *p_res_eeprom){
     if (!blinkdisp){        //a neblika display
         if (!rezim) {     //tak zmen rezim
            rezim = 3;
@@ -235,7 +242,8 @@ u_short rut_encB(u_short *p_res_eeprom){
         konver(rezim, res_eeprom, &lcd_result);
         display(&lcd_result);
     }
-    povol_prerus(priz_enc);
+    priz_enc = 0;
+    povol_prerus_enkoder = 1; //potom povolim prerusenie
     return(rezim);
 }
 /*  Cez switch nastavim pismena a cez cyklus for pre lcd_result nastavim prve tri cislice */
@@ -260,13 +268,21 @@ unsigned int res_lcd;
     }
     lcd_result[3] = 0xDF;   //stupen z tabuliek graf. kontroleru
     lcd_result[4] = 0x43;   //C - celsia
+    
     if(!svietiLCD){ //ak nie je nastaveny priznak tak prazdna medzera
         lcd_result[5] = 0x20;   //medzera
     }
     else{   //ak je priznak nastaveny tak znak <<
         lcd_result[5] = 0xFD;   //znak <<
     }
-    if(zapis) lcd_result[5] = 0x23;   //znak zapisu #
+    
+    if(zapis){
+        lcd_result[5] = 0x23;   //znak zapisu #
+    }
+    else{
+        lcd_result[5] = 0x20;
+    }
+    
     for (temp = 0; temp < 3; temp++){
         switch (temp) {
             case 0 : temp0 = sto; break;
@@ -297,14 +313,13 @@ void display(u_short lcd_result[]){
         if(i<7) nobusy_send_instr(0x06);    //posun display - entry mode set
     }
 }
-
+/*
 u_short povol_prerus(u_short *p_priz_enc){
     priz_enc = 0;   //aby som zbytocne neskakal do rutiny a nemenil rezim
     povol_prerus_rucka = 1;
     povol_prerus_enkoder = 1; //potom povolim prerusenie
     return(priz_enc);
 }
-/*
 void zapis_eeprom(u_short rezim, u_short res_eeprom){
     GIE_bit = 0;    //zakaz prerusenie pocas zapisu
     EEADR = rezim;
